@@ -21,6 +21,9 @@ GO
 IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouse')
 BEGIN
     ALTER DATABASE DataWarehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+/* Forces the database into single-user mode, meaning only one connection can access it.
+WITH ROLLBACK IMMEDIATE cancels all existing transactions and connections immediately. This is necessary to drop a database that might be in use.
+*/
     DROP DATABASE DataWarehouse;
 END;
 GO
